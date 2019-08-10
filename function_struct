@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<conio.h>
+struct student
+{
+int id, age, marks;
+};
+int validate(struct student st);
+int qualify(struct student st);
+int main();
+{
+struct student st[10];
+int i, n;
+clrscr();
+printf("Enter the number of students\n");
+scanf("%d", &n);
+for(i=0;i<n;i++)
+{
+printf("Enter id, age and marks of student %d\n",i+1);
+scanf("%d,%d,%d", &st[i].id, &st[i].age, &st[i].marks);
+if(qualify(st[i]))
+{
+printf("Student %d is eligible for admission\n",i+1);
+}
+else
+{
+printf("Student %d is not eligible for admission\n", i+1);
+}
+getch();
+return 0;
+}
+int validate(struct student st)
+{
+if(st.age>=20 && st.marks>=0 && st.marks<=100)
+return 1;
+else
+return 0;
+}
+int qualify(struct student st)
+{
+if(validate(st))
+{
+if(s.marks>=65)
+return 1;
+else 
+return 0;
+}
+else
+printf("Details are not valid");
+return 0;
+}
+}
