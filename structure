@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<conio.h>
+struct student
+{
+int id;
+int age;
+int marks;
+};
+struct student st;
+void main()
+{
+printf("Enter student details\n");
+scanf("%d %d %d", &st.id, &st.age, &st.marks);
+if(st.age>=20 && st.marks>=0 && st.marks<=100)
+{
+if(st.marks>=65)
+{
+printf("Student is eligible for admission\n");
+}
+else
+{
+printf("Student is not eligible for admission\n");
+}
+}
+else
+{
+printf("Invalid details");
+}
+getch();
+}
