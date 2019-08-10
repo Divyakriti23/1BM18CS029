@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<conio.h>
+struct student
+{
+int age;
+int marks;
+int id[10];
+};
+ void main()
+ {
+ struct student st[100];
+ int i, n;
+ clrscr();
+ printf("Enter number of students\n");
+ scanf("%d", &n);
+ for(i=0;i<n;i++)
+ {
+ printf("Enter id, age and marks of %d student\n", i+1);
+ scanf("%d %d %d", &st[i].id, &st[i].age, &st[i].marks);
+ if(st[i].age>=20 && st[i].marks>=0 && st[i].marks<=100)
+ {
+     if(st[i].marks>=65)
+     {
+         printf("Student %d is eligible for admission\n", i+1);
+     }
+     else
+     {
+         printf("Student %d is not eligible for admission\n", i+1);
+     }
+ }
+ else
+ {
+     printf("Details are invalid");
+ }
+ getch();
+ }
