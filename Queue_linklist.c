@@ -1,124 +1,119 @@
-#include <stdio.h>
-#include <stdlib.h>
-
+#include<stdio.h>
+#include<stdlib.h>
 struct node
 {
-    int data;
-    struct node *next;
+	int data;
+	struct node *next;
 };
-
-typedef struct node* Node;
-
-void enq(int ele, Node *rear, Node *front);
-void deq(Node *rear, Node *front);
-void display(Node rear, Node front);
-
-void main()
+typedef struct node *NODE;
+void display(NODE head);
+void insert(NODE head,int item);
+NODE getnode();
+NODE insert_front(int item,NODE head);
+NODE delete(NODE head);
+int main()
 {
-    int num, choice, e;
-
-    printf("\n 1. Enque");
-    printf("\n 2. Deque");
-    printf("\n 3. to Display");
-    printf("\n 4. to Exit");
-    
-    Node front, rear;
-    front = rear = NULL;
-    while (1)
-    {
-        printf("\n Enter choice : ");
-        scanf("%d", &choice);
-        switch (choice)
-        {
-        case 1:
-            printf("Enter data : ");
-            scanf("%d", &num);
-            enq(num, &rear, &front);
-            break;
-        case 2:
-            deq(&rear, &front);
-            break;
-        case 3:
-            display();
-            break;
-       
-        case 4:
-            exit(0);
-
-       
-        default:
-            printf("Invalid Input");
-            break;
-        }
-    }
+	NODE head=NULL;
+	int ch,ele,e;
+	printf("Enter 1 to create a list,2 to insert,3 to delete,4 to display,0 to exit=\n");
+	scanf("%d",&ch);
+	while(ch!=0)
+	{
+	switch(ch)
+	{
+		case 1:printf("enter the ele=\n");
+	 		scanf("%d",&ele);
+			head=insert_front(ele,head);
+			break;
+		case 2:printf("enter the ele=\n");
+	 		scanf("%d",&ele);
+			insert(head,ele);
+			break;
+		case 3:head=delete(head);
+			break;
+		case 4:display(head);
+		default:break;
+	}
+	printf("again Enter 1 to create a list,2 to push,3 to pop,4 to display,0 to exit=\n");
+	scanf("%d",&ch);
+	}
 }
-
-
-// to Enqueue
-Node enq(int ele, Node *rear, Node *front)
+void insert(NODE head,int item)
 {
-    if (rear == NULL)
-    {
-        rear = (Node)malloc(sizeof(struct node));
-        rear->next = NULL;
-        rear->data = ele;
-        front = rear;
-	return front;
-    }
-    else
-    {
-        Node temp=(Node)malloc(sizeof(struct node));
-        rear->next = temp;
-        temp->data = ele;
-        temp->next = NULL;
-
-        rear = temp;
-	return &rear;
-    }
+	NODE p,q;
+	q=getnode();
+	q->data=item;
+	p=head;
+	while(p->next!=NULL)
+	{
+		p=p->next;
+	}
+	p->next=q;
+	q->next=NULL;
 }
-
-// Displaying the elements of the queue
-void display(Node rear, Node front)
+NODE delete(NODE head)
 {
-    Node front1 = front;
-
-    if ((front1 == NULL) && (rear == NULL))
-    {
-        printf("Queue is empty");
-        return;
-    }
-    while (front1 != rear)
-    {
-        printf("%d ", front1->data);
-        front1 = front1->next;
-    }
-    if (front1 == rear)
-        printf("%d", front1->data);
+	NODE p=head;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return head;
+	}
+	printf("deleted ele=%d\n",p->data);
+	head=p->next;
+	free(p);
+	return head;
+	
 }
-
-// to Dequeue
-void deq(Node *rear, Node *front)
+NODE getnode()
 {
-    Node front1 = front;
-
-    if (front1 == NULL)
-    {
-        printf("\n Empty Queue");
-        return;
-    }
-    else
-        if (front1->next != NULL)
-        {
-            front1 = front1->next;
-            printf("\n Dequed value : %d", front->data);
-            free(front);
-            front = front1;
-        }
-        else
-        {
-            printf("\n Dequed value : %d", front->data);
-            free(front);
-            front = NULL;
-            rear = NULL;
-        }
+	NODE p;
+	p=(NODE)malloc(sizeof(struct node));
+	if(p!=NULL)
+	{
+	return p;
+	}
+	else
+	{
+	printf("memory could not be allocated");
+	exit(0);
+	}
+}
+void display(NODE head)
+{
+NODE p;
+	if(head==NULL)
+	{
+		printf("queue is empty\n");
+		exit(0);
+	}
+	p=head;
+	printf("contents of list=\n");
+	while(p!=NULL)
+	{
+		printf("%d\n",p->data);
+		p=p->next;
+	}
+}
+NODE insert_front(int item,NODE head)
+{
+	NODE p;
+	p=getnode();
+	p->data=item;
+	p->next=head;
+	head=p;
+	return head;
+}
+void insert(NODE head,int item)
+{
+	NODE p,q;
+	q=getnode();
+	q->data=item;
+	p=head;
+	while(p->next!=NULL)
+	{
+		p=p->next;
+	}
+	p->next=q;
+	q->next=NULL;
 }
